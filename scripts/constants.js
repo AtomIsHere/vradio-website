@@ -1,0 +1,1 @@
+const apiLocation = "localhost:8080"

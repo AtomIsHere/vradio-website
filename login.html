@@ -4,22 +4,24 @@
     <meta charset="UTF-8">
     <title>Log In</title>
     <link rel="stylesheet" href="stylesheets/login-stylesheet.css">
+    <script type="text/javascript" src="scripts/constants.js"></script>
+    <script type="text/javascript" src="scripts/auth.js"></script>
 </head>
 <body>
 <div class="login-box">
     <h2>Login</h2>
-    <form>
+    <form id="login-form">
         <div class="user-box">
-            <input type="text" name="" required="">
+            <input type="text" name="" required="" id="username-field">
 
             <label>Username</label>
         </div>
         <div class="user-box">
-            <input type="password" name="" required="">
+            <input type="password" name="" required="" id="password-field">
 
             <label>Password</label>
         </div>
-        <a href="#">
+        <a href="#" id="submit-button">
             <span></span>
             <span></span>
             <span></span>
@@ -28,6 +30,6 @@
         </a>
     </form>
 </div>
-<script src="scripts/login.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
 </body>
 </html>
