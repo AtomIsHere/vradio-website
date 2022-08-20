@@ -6,18 +6,31 @@ fetch("http://" + apiLocation + "/ping").then((result) => {
     alert("API is currently down, this site will not function.")
 })
 
-let authDetails = null;
-
 const authCookie = getCookie("vradio-auth")
 if(authCookie !== "") {
-    authDetails = JSON.parse(authCookie)
-    // TODO: Confirm token is valid
+    let authDetails = JSON.parse(authCookie)
+
+    fetch("http://" + apiLocation + "/account/check-auth?username=" + authDetails.username + "&auth-key=" + authDetails.token).then((result) => {
+        if(result.status === 200) {
+            result.text().then((authed) => {
+                if(authed === "true") {
+                    displayAccountDetails(authDetails)
+                } else {
+                    deleteCookie("vradio-auth")
+                }
+            })
+        } else {
+            deleteCookie("vradio-auth")
+        }
+    }).catch(() => {
+        deleteCookie("vradio-auth")
+    });
 }
 
-if(authDetails !== null) {
+function displayAccountDetails(authDetails) {
     document.getElementById("account-section").hidden = true
     document.getElementById("account-details").hidden = false
 
     let display = document.getElementById("account-para")
-     display.innerHTML = "Logged in as " + authDetails.username
+    display.innerHTML = "Logged in as " + authDetails.username
 }
