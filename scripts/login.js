@@ -18,7 +18,7 @@ submitButton.addEventListener('click', async function () {
         response.text().then((token) => {
             let authDetails = new AuthenticationDetails(username, token)
 
-            document.cookie = "vradio-auth=" + JSON.stringify(authDetails)
+            setCookie("vradio-auth", JSON.stringify(authDetails), 7)
             window.location.href = "index.html"
         })
     } else {
