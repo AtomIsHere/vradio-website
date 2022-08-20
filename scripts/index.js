@@ -11,5 +11,5 @@ if(authDetails !== null) {
     document.getElementById("account-details").hidden = false
 
     let display = document.getElementById("account-para")
-     display.innerHTML = display.innerHTML + authDetails.username
+     display.innerHTML = "Logged in as " + authDetails.username
 }
