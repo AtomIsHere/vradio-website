@@ -6,9 +6,20 @@ fetch("http://" + apiLocation + "/ping").then((result) => {
     alert("API is currently down, this site will not function.")
 })
 
+let authDetails = null
+
+document.getElementById("logout-button").addEventListener('click', function () {
+    if(authDetails !== null) {
+        fetch("http://" + apiLocation + "/account/logout?username=" + authDetails.username + "&auth-key=" + authDetails.token).then(() => {
+            deleteCookie()
+            location.reload()
+        })
+    }
+})
+
 const authCookie = getCookie("vradio-auth")
 if(authCookie !== "") {
-    let authDetails = JSON.parse(authCookie)
+    authDetails = JSON.parse(authCookie)
 
     fetch("http://" + apiLocation + "/account/check-auth?username=" + authDetails.username + "&auth-key=" + authDetails.token).then((result) => {
         if(result.status === 200) {
@@ -16,15 +27,20 @@ if(authCookie !== "") {
                 if(authed === "true") {
                     displayAccountDetails(authDetails)
                 } else {
-                    deleteCookie("vradio-auth")
+                    deleteAuthCookie()
                 }
             })
         } else {
-            deleteCookie("vradio-auth")
+            deleteAuthCookie()
         }
     }).catch(() => {
-        deleteCookie("vradio-auth")
+        deleteAuthCookie()
     });
+}
+
+function deleteAuthCookie() {
+    deleteCookie("vradio-auth")
+    authDetails = null;
 }
 
 function displayAccountDetails(authDetails) {
