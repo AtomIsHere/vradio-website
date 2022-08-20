@@ -1,3 +1,11 @@
+fetch("http://" + apiLocation + "/ping").then((result) => {
+    if(result.status !== 200) {
+        alert("Something went wrong with the API")
+    }
+}).catch(() => {
+    alert("API is currently down, this site will not function.")
+})
+
 let authDetails = null;
 
 const authCookie = getCookie("vradio-auth")
