@@ -4,11 +4,11 @@ const passwordField = document.getElementById("password-field");
 const submitButton = document.getElementById("submit-button");
 
 submitButton.addEventListener('click', async function () {
-    const username = usernameField.value
-    const password = passwordField.value
+    let username = usernameField.value
+    let password = passwordField.value
 
-    const response = await fetch('http://' + apiLocation + '/account/login?username=' + username + "&password=" + password);
-    const status = response.status
+    let response = await fetch('http://' + apiLocation + '/account/login?username=' + username + "&password=" + password);
+    let status = response.status
 
     console.log(status)
 
