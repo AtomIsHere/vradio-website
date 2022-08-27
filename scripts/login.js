@@ -15,10 +15,8 @@ submitButton.addEventListener('click', async function () {
     if(status === 403 || status === 404) {
         alert("Invalid account details!")
     } else if(status === 200) {
-        response.text().then((token) => {
-            let authDetails = new AuthenticationDetails(username, token)
-
-            setCookie("vradio-auth", JSON.stringify(authDetails), 7)
+        response.json().then((token) => {
+            setCookie("vradio-auth", JSON.stringify(token), 7)
             window.location.href = "index.html"
         })
     } else {
